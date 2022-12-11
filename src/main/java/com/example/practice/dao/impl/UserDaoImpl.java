@@ -28,6 +28,7 @@ public class UserDaoImpl implements UserDao {
     private static final String IS_ADMIN = "SELECT role from users where username = ? and password = ?";
     private static final String REGISTER = "insert into users(username, password) VALUES (?, ?)";
     private static final String GET_ALL = "SELECT * from users where is_active = true order by status desc";
+    private static final String GET_ALL_USERS = "select id, username, status from users where role = 'user' order by status desc";
     private static final String GET_BLOCKED_USERS = "SELECT * from users where is_active = false order by status desc";
     private static final String GET_BY_ID = "SELECT * from users where id = ?";
     private static final String GET_ID = "SELECT id from users where username = ? and password = ?";
@@ -49,17 +50,32 @@ public class UserDaoImpl implements UserDao {
         }
         return rowCount == 1;
     }
-
     @Override
     public List<User> getAll() throws DaoException {
         return getUsers(GET_ALL);
     }
-
     @Override
     public List<User> getAllBlockedUsers() throws DaoException {
         return getUsers(GET_BLOCKED_USERS);
     }
 
+    @Override
+    public List<User> getAllUsers() throws  DaoException{
+        try (PreparedStatement statement = con.prepareStatement(GET_ALL_USERS)) {
+            List<User> users = new ArrayList<>();
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                User u = new User();
+                u.setId(resultSet.getInt(1));
+                u.setUsername(resultSet.getString(2));
+                u.setStatus(resultSet.getInt(3));
+                users.add(u);
+            }
+            return users;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
     private List<User> getUsers(String get_users) throws DaoException {
         try (PreparedStatement statement = con.prepareStatement(get_users)) {
             List<User> users = new ArrayList<>();

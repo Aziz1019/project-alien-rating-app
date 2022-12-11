@@ -53,6 +53,15 @@ public class ReviewServiceImpl implements ReviewService {
     }
 
     @Override
+    public List<Review> getAllReviews() {
+        try {
+            return reviewDao.getAllReviews();
+        } catch (DaoException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
     public boolean saveDB(Review review) {
         try {
             return reviewDao.saveDB(review);

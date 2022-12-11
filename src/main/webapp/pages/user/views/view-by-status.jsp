@@ -13,9 +13,7 @@
     <title>View Users</title>
 </head>
 <body>
-
-<h1>Users Board</h1>
-
+<h1>User Board</h1>
 <table border="1" width="1">
     <thead>
     <tr>

@@ -12,4 +12,6 @@ public interface UserDao extends BaseDao<User> {
     boolean isAdmin(String login, String password) throws DaoException;
     Integer getIdByUsernameAndPassword(String login, String password) throws DaoException;
     boolean updateStatus(Boolean positive, Integer userId) throws DaoException;
+    List<User> getAllUsers() throws  DaoException;
+
 }

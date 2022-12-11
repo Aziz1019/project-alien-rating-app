@@ -17,23 +17,21 @@
 <table border="1" width="1">
     <thead>
     <tr>
-        <th>Id</th>
-        <th>User ID</th>
+        <th>Source</th>
+        <th>Alien Name</th>
         <th>Review</th>
-        <th>Alien ID</th>
         <th>Rating</th>
-        <th>Date</th>
+        <th>Username</th>
     </tr>
     </thead>
     <tbody>
     <c:forEach items="${reviews}" var="r">
         <tr>
-            <td>${r.getId()}</td>
-            <td>${r.getUserId()}</td>
+            <td>${r.getSource()}</td>
+            <td>${r.getAlienName()}</td>
             <td>${r.getReview()}</td>
-            <td>${r.getAlienId()}</td>
             <td>${r.getRating()}</td>
-            <td>${r.getCreatedAt()}</td>
+            <td>${r.getUsername()}</td>
         </tr>
     </c:forEach>
     </tbody>

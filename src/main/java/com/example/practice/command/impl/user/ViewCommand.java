@@ -17,7 +17,7 @@ public class ViewCommand implements Command {
                 req.setAttribute("users", service.getAll());
                 page = "pages/admin/views/view-users.jsp";
             } else if (req.getParameter("block").equals("1")) {
-                req.setAttribute("users", service.getAll());
+                req.setAttribute("users", service.getAllUsers());
                 page = "pages/user/views/view-by-status.jsp";
 
             } else {

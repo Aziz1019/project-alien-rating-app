@@ -1,6 +1,5 @@
 package com.example.practice.dao.impl;
 
-import com.example.practice.dao.AlienDao;
 import com.example.practice.dao.ReviewDao;
 import com.example.practice.dao.config.PostgresConnection;
 import com.example.practice.exception.DaoException;
@@ -26,7 +25,11 @@ public class ReviewDaoImpl implements ReviewDao {
     }
 
     private static final String INSERT_REVIEW = "INSERT INTO reviews (user_id, alien_id, review, rating) VALUES (?,?,?,?)";
-    private static final String GET_ALL_REVIEWS = "SELECT * FROM reviews";
+    private static final String GET_ALL_REVIEWS = "select a.source, a.alien_name, s.review, s.rating, u.username, s.created_at from aliens a\n" +
+            "    left join reviews s on a.id = s.alien_id\n" +
+            "    left join users u on s.user_id = u.id where review is not null order by rating desc";
+
+    private static final String GET_ALL = "select * from reviews";
 
     private static final String GET_OVERALL_RATING_BY_ID = "SELECT count(rating) from reviews where alien_id = ?";
     private static final String GET_AVG_RATING = "SELECT avg(rating) from reviews where alien_id = ?";
@@ -88,7 +91,7 @@ public class ReviewDaoImpl implements ReviewDao {
     @Override
     public List<Review> getAll() throws DaoException {
         List<Review> reviews = new ArrayList<>();
-        try (PreparedStatement statement = con.prepareStatement(GET_ALL_REVIEWS)){
+        try (PreparedStatement statement = con.prepareStatement(GET_ALL)){
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
                 Review review = new Review();
@@ -105,6 +108,29 @@ public class ReviewDaoImpl implements ReviewDao {
         }
         return reviews;
     }
+
+    @Override
+    public List<Review> getAllReviews() throws DaoException {
+        List<Review> reviews = new ArrayList<>();
+        try (PreparedStatement statement = con.prepareStatement(GET_ALL_REVIEWS)) {
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                reviews.add(new Review(
+                                resultSet.getString("source"),
+                                resultSet.getString("alien_name"),
+                                resultSet.getString("review"),
+                                resultSet.getInt("rating"),
+                                resultSet.getString("username"),
+                                resultSet.getString("created_at")
+                        )
+                );
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return reviews;
+    }
+
 
     @Override
     public Optional<Review> findById(Long id) throws DaoException {

@@ -121,4 +121,14 @@ public class UserServiceImpl implements UserService {
         }
     }
 
+    @Override
+    public List<User> getAllUsers() throws ServiceException {
+        try {
+            return userDao.getAllUsers();
+        } catch (DaoException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
 }

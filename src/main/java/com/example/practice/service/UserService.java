@@ -18,7 +18,7 @@ public interface UserService {
     List<User> getAllBlockedUsers() throws ServiceException;
     boolean isAdmin(String login, String password) throws ServiceException;
     Integer getIdByUsernameAndPassword(String login, String password) throws ServiceException;
-
     boolean updateStatus(Boolean positive, Integer userId) throws ServiceException;
+    List<User> getAllUsers() throws ServiceException;
 
 }

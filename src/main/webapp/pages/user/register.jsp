@@ -10,7 +10,7 @@
     <div class="row justify-content-center">
         <div class="col-md-5">
             <div class="card">
-                <h2 class="card-title text-center">Login</h2>
+                <h2 class="card-title text-center">Register</h2>
                 <div class="card-body py-md-4">
                     <form _lpchecked="1" method="get" action="controller">
                         <div class="form-group">

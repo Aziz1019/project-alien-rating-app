@@ -2,6 +2,7 @@ package com.example.practice.command.impl.review;
 
 import com.example.practice.command.Command;
 import com.example.practice.exception.CommandException;
+import com.example.practice.model.Review;
 import com.example.practice.service.ReviewService;
 import com.example.practice.service.impl.ReviewServiceImpl;
 import javax.servlet.http.HttpServletRequest;
@@ -11,6 +12,7 @@ public class ForwardReviewCommand implements Command {
     @Override
     public String execute(HttpServletRequest request) throws CommandException {
         ReviewService service = ReviewServiceImpl.getInstance();
+        Review review = new Review();
         String page = request.getParameter("page");
         HttpSession session = request.getSession();
         String path = null;
@@ -27,7 +29,7 @@ public class ForwardReviewCommand implements Command {
                 path = "pages/user/add-review.jsp";
                 break;
             case "user":
-                request.setAttribute("reviews", service.getReviews());
+                request.setAttribute("reviews", service.getAllReviews());
                 path = "pages/user/views/review-page.jsp";
                 break;
         }
