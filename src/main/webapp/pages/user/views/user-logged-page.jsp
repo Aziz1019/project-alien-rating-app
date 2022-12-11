@@ -29,7 +29,9 @@
 <br>
 <br>
 <br>
-<%--Change Show Users--%>
+<%--Change Show Users | by status and alien name not id!--%>
+<%--Add select reviews by rating--%>
+
 <a href="controller?command=view&block=0">Show users</a>
 <br>
 <br>
