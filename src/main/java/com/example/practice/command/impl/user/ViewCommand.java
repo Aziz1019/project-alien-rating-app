@@ -1,5 +1,4 @@
 package com.example.practice.command.impl.user;
-
 import com.example.practice.command.Command;
 import com.example.practice.exception.CommandException;
 import com.example.practice.exception.ServiceException;
@@ -17,6 +16,10 @@ public class ViewCommand implements Command {
             if(req.getParameter("block").equals("0")){
                 req.setAttribute("users", service.getAll());
                 page = "pages/admin/views/view-users.jsp";
+            } else if (req.getParameter("block").equals("1")) {
+                req.setAttribute("users", service.getAll());
+                page = "pages/user/views/view-by-status.jsp";
+
             } else {
                 req.setAttribute("users", service.getAllBlockedUsers());
                 page = "pages/admin/views/view-blocked-users.jsp";
