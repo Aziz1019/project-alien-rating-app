@@ -14,12 +14,7 @@ public class EditFormCommand implements Command {
     @Override
     public String execute(HttpServletRequest req) throws CommandException {
         UserService service = UserServiceImpl.getInstance();
-        Optional<User> currentUser = null;
-        try {
-            currentUser = service.findById(Long.valueOf(req.getParameter("id")));
-        } catch (ServiceException e) {
-            throw new CommandException(e);
-        }
+        Optional<User> currentUser = service.findById(Long.valueOf(req.getParameter("id")));
         currentUser.ifPresent(user -> req.setAttribute("currentUser", user));
         return "pages/admin/edits/edit-user.jsp";
     }

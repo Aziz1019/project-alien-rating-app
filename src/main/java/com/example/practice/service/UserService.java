@@ -8,17 +8,17 @@ import java.util.List;
 import java.util.Optional;
 
 public interface UserService {
-    boolean authenticate(String login, String password) throws ServiceException;
-    boolean registerUser(User user)throws ServiceException;
-    boolean update(User user)throws ServiceException;
-    boolean deleteById(Integer id)throws ServiceException;
-    Optional<User> findById(Long id)throws ServiceException;
-    List<User> getAll()throws ServiceException;
-    boolean blockUser(Integer userId) throws ServiceException;
-    List<User> getAllBlockedUsers() throws ServiceException;
-    boolean isAdmin(String login, String password) throws ServiceException;
-    Integer getIdByUsernameAndPassword(String login, String password) throws ServiceException;
-    boolean updateStatus(Boolean positive, Integer userId) throws ServiceException;
-    List<User> getAllUsers() throws ServiceException;
+    boolean authenticate(String login, String password);
+    boolean registerUser(User user);
+    boolean update(User user);
+    boolean deleteById(Integer id);
+    Optional<User> findById(Long id);
+    List<User> getAll();
+    boolean blockUser(Integer userId);
+    List<User> getAllBlockedUsers();
+    boolean isAdmin(String login, String password);
+    Integer getIdByUsernameAndPassword(String login, String password);
+    boolean updateStatus(Boolean positive, Integer userId);
+    List<User> getAllUsers();
 
 }

@@ -18,15 +18,10 @@ public class RegisterCommand implements Command {
         String password = request.getParameter("password");
         String repass = request.getParameter("repass");
         String page;
-        if(repass.equals(password)){
-            try {
-                service.registerUser(new User(username,password));
-            } catch (ServiceException e) {
-                throw new CommandException(e);
-            }
+        if (repass.equals(password)) {
+            service.registerUser(new User(username, password));
             page = "index.jsp";
-        }
-        else {
+        } else {
             page = "register.jsp";
         }
         return page;

@@ -22,17 +22,13 @@ public class UpdateFormCommand implements Command {
         String role = request.getParameter("role");
         String date = request.getParameter("date");
         User user = new User(
-                Integer.parseInt(id),username,
+                Integer.parseInt(id), username,
                 Integer.parseInt(status),
                 Boolean.parseBoolean(active),
-                role,date,password);
+                role, date, password);
 
-        try {
-            service.update(user);
-            request.setAttribute("users", service.getAll());
-        } catch (ServiceException e) {
-            throw new CommandException(e);
-        }
+        service.update(user);
+        request.setAttribute("users", service.getAll());
         return "pages/admin/views/view-users.jsp";
     }
 }

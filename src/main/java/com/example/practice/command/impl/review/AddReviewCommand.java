@@ -48,18 +48,6 @@ public class AddReviewCommand implements Command {
     }
 
     private void updateStatus(UserService userService, Integer userId, boolean b) {
-        if (b) {
-            try {
-                userService.updateStatus(true, userId);
-            } catch (ServiceException e) {
-                throw new RuntimeException(e);
-            }
-        } else {
-            try {
-                userService.updateStatus(false, userId);
-            } catch (ServiceException e) {
-                throw new RuntimeException(e);
-            }
-        }
+        userService.updateStatus(b, userId);
     }
 }

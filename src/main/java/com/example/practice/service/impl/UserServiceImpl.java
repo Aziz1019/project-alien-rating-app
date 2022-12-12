@@ -1,4 +1,5 @@
 package com.example.practice.service.impl;
+
 import com.example.practice.dao.UserDao;
 import com.example.practice.dao.impl.UserDaoImpl;
 import com.example.practice.exception.DaoException;
@@ -10,19 +11,21 @@ import java.util.List;
 import java.util.Optional;
 
 public class UserServiceImpl implements UserService {
-    private static  UserService instance;
+    private static UserService instance;
+
     public static UserService getInstance() {
-        if (instance==null){
+        if (instance == null) {
             instance = new UserServiceImpl();
         }
         return instance;
     }
+
     private final UserDao userDao = UserDaoImpl.getInstance();
 
     @Override
     public boolean authenticate(String login, String password) {
         boolean match = false;
-        if(!login.isBlank() || !password.isBlank()){
+        if (!login.isBlank() || !password.isBlank()) {
             try {
                 match = userDao.authenticate(login, password);
             } catch (DaoException e) {
@@ -53,7 +56,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public boolean deleteById(Integer id) {
         try {
-            return  userDao.deleteById(id);
+            return userDao.deleteById(id);
         } catch (DaoException e) {
             throw new RuntimeException();
         }
@@ -78,7 +81,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean blockUser(Integer userId) throws ServiceException {
+    public boolean blockUser(Integer userId) {
         try {
             return userDao.blockUser(userId);
         } catch (DaoException e) {
@@ -87,7 +90,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<User> getAllBlockedUsers() throws ServiceException {
+    public List<User> getAllBlockedUsers() {
         try {
             return userDao.getAllBlockedUsers();
         } catch (DaoException e) {
@@ -96,7 +99,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean isAdmin(String login, String password) throws ServiceException {
+    public boolean isAdmin(String login, String password) {
         try {
             return userDao.isAdmin(login, password);
         } catch (DaoException e) {
@@ -105,15 +108,16 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Integer getIdByUsernameAndPassword(String login, String password) throws ServiceException {
+    public Integer getIdByUsernameAndPassword(String login, String password) {
         try {
             return userDao.getIdByUsernameAndPassword(login, password);
         } catch (DaoException e) {
             throw new RuntimeException(e);
         }
     }
+
     @Override
-    public boolean updateStatus(Boolean positive, Integer userId) throws ServiceException {
+    public boolean updateStatus(Boolean positive, Integer userId) {
         try {
             return userDao.updateStatus(positive, userId);
         } catch (DaoException e) {
@@ -122,7 +126,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<User> getAllUsers() throws ServiceException {
+    public List<User> getAllUsers() {
         try {
             return userDao.getAllUsers();
         } catch (DaoException e) {

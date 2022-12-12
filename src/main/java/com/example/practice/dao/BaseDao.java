@@ -17,6 +17,5 @@ public interface BaseDao<T> {
 
     boolean update(T t) throws DaoException;
 
-    // Alternative T update(T t);
 
 }

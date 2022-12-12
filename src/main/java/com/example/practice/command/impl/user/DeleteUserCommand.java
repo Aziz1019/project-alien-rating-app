@@ -12,12 +12,8 @@ public class DeleteUserCommand implements Command {
     @Override
     public String execute(HttpServletRequest req) throws CommandException {
         UserService service = UserServiceImpl.getInstance();
-        try {
-            service.deleteById(Integer.parseInt(req.getParameter("id")));
-            req.setAttribute("users", service.getAll());
-        } catch (ServiceException e) {
-            throw new CommandException(e);
-        }
+        service.deleteById(Integer.parseInt(req.getParameter("id")));
+        req.setAttribute("users", service.getAll());
         return "pages/admin/views/view-users.jsp";
     }
 }

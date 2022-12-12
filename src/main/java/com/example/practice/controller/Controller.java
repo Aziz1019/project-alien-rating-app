@@ -15,7 +15,7 @@ import java.io.IOException;
 @WebServlet(name = "Controller", urlPatterns = "/controller")
 public class Controller extends HttpServlet {
 
-//    @Override
+    //    @Override
 //    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 //
 //        String commandStr = req.getParameter("command");
@@ -42,12 +42,12 @@ public class Controller extends HttpServlet {
         try {
             page = command.execute(req);
             RequestDispatcher dispatcher = req.getRequestDispatcher(page);
-            dispatcher.forward(req,res);
+            dispatcher.forward(req, res);
 
         } catch (CommandException e) {
             req.setAttribute("error_msg", e.getCause());
             req.getRequestDispatcher("pages/error/error_500.jsp").forward(req, res);
-        }    }
-
+        }
+    }
 
 }

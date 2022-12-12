@@ -12,7 +12,7 @@
 </head>
 <body>
 <footer class="container-fluid text-center">
-    <p>Footer Text</p>
+    <p>Alien Corp 2022</p>
 </footer>
 </body>
 </html>

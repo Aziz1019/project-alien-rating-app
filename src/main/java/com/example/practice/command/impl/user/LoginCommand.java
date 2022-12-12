@@ -22,27 +22,25 @@ public class LoginCommand implements Command {
         String page;
 
         HttpSession session = request.getSession();
-        try {
-            if (userService.authenticate(login, pass)) {
-                if(userService.isAdmin(login, pass)) {
-                    Integer adminId = userService.getIdByUsernameAndPassword(login, pass);
-                    request.setAttribute("user", login);
-                    session.setAttribute("user_name", login);
-                    session.setAttribute("id", adminId);
-                    page = "pages/admin/admin-logged-page.jsp";
-                } else {
-                    Integer userId = userService.getIdByUsernameAndPassword(login, pass);
-                    request.setAttribute("user", login);
-                    session.setAttribute("user_name", login);
-                    session.setAttribute("id", userId);
-                    page = "pages/user/views/user-logged-page.jsp";
-                }
+
+        if (userService.authenticate(login, pass)) {
+            if (userService.isAdmin(login, pass)) {
+                Integer adminId = userService.getIdByUsernameAndPassword(login, pass);
+                request.setAttribute("user", login);
+                session.setAttribute("user_name", login);
+                session.setAttribute("id", adminId);
+                page = "pages/admin/admin-logged-page.jsp";
             } else {
-                page = "pages/errors/login-error.jsp";
+                Integer userId = userService.getIdByUsernameAndPassword(login, pass);
+                request.setAttribute("user", login);
+                session.setAttribute("user_name", login);
+                session.setAttribute("id", userId);
+                page = "pages/user/views/user-logged-page.jsp";
             }
-        } catch (ServiceException e) {
-            throw new CommandException(e);
+        } else {
+            page = "pages/errors/login-error.jsp";
         }
+
         return page;
     }
 }

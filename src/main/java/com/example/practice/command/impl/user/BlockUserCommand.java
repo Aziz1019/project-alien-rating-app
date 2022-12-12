@@ -13,12 +13,9 @@ public class BlockUserCommand implements Command {
     @Override
     public String execute(HttpServletRequest request) throws CommandException {
         UserService service = UserServiceImpl.getInstance();
-        try {
-            service.blockUser(Integer.parseInt(request.getParameter("id")));
-            request.setAttribute("users", service.getAll());
-        } catch (ServiceException e) {
-            throw new CommandException(e);
-        }
+        service.blockUser(Integer.parseInt(request.getParameter("id")));
+        request.setAttribute("users", service.getAll());
+
         return "pages/admin/views/view-users.jsp";
     }
 }
