@@ -13,16 +13,12 @@ public class LoginCommand implements Command {
 
     @Override
     public String execute(HttpServletRequest request) throws CommandException {
-
         UserService userService = UserServiceImpl.getInstance();
-
         String login = request.getParameter("name");
         String pass = request.getParameter("password");
-
         String page;
 
         HttpSession session = request.getSession();
-
         if (userService.authenticate(login, pass)) {
             if (userService.isAdmin(login, pass)) {
                 Integer adminId = userService.getIdByUsernameAndPassword(login, pass);
@@ -40,7 +36,6 @@ public class LoginCommand implements Command {
         } else {
             page = "pages/errors/login-error.jsp";
         }
-
         return page;
     }
 }
