@@ -1,18 +1,19 @@
 import com.example.practice.dao.UserDao;
 import com.example.practice.dao.impl.UserDaoImpl;
 import com.example.practice.exception.DaoException;
-import com.example.practice.model.User;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import java.util.Optional;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class UserDaoTests {
     private final UserDao userDao = UserDaoImpl.getInstance();
+
     @Test
     public void testSingletonPattern() {
         UserDao userDao1 = UserDaoImpl.getInstance();
-        Assertions.assertEquals(userDao, userDao1);
+        assertEquals(userDao, userDao1);
     }
     @Test
     public void testAuthenticationByUsernameAndPassword() throws DaoException {
