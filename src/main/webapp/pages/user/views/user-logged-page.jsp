@@ -24,9 +24,9 @@
 <div class="container-fluid text-center">
     <div class="row content">
         <div class="col-sm-8 text-left">
-            <h1>Welcome to ALien Review App <%= session.getAttribute("user_name") %>!</h1>
+            <h1>Welcome to Alien Review App <%= session.getAttribute("user_name") %>!</h1>
             <p>This is the place you are going to enjoy reviewing you favorite Comics Heroes from different universes.
-                Like DC and Marvl Universe.
+                Like DC and Marvel Universe.
                 Review and leave your feedback. And watch how close your rating was right among others.
                 If positive, your score will be on top.
             <hr>
