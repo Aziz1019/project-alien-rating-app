@@ -3,11 +3,13 @@ package com.example.practice.command.impl.user;
 import com.example.practice.command.Command;
 import com.example.practice.exception.CommandException;
 import com.example.practice.exception.ServiceException;
+import com.example.practice.model.User;
 import com.example.practice.service.UserService;
 import com.example.practice.service.impl.UserServiceImpl;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.Optional;
 
 public class LoginCommand implements Command {
 
@@ -19,16 +21,15 @@ public class LoginCommand implements Command {
         String page;
 
         HttpSession session = request.getSession();
+
         if (userService.authenticate(login, pass)) {
             if (userService.isAdmin(login, pass)) {
                 Integer adminId = userService.getIdByUsernameAndPassword(login, pass);
-                request.setAttribute("user", login);
                 session.setAttribute("user_name", login);
                 session.setAttribute("id", adminId);
                 page = "pages/admin/admin-logged-page.jsp";
             } else {
                 Integer userId = userService.getIdByUsernameAndPassword(login, pass);
-                request.setAttribute("user", login);
                 session.setAttribute("user_name", login);
                 session.setAttribute("id", userId);
                 page = "pages/user/views/user-logged-page.jsp";

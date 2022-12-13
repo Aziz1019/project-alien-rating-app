@@ -1,10 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: User
-  Date: 11/26/2022
-  Time: 10:09 AM
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
@@ -15,9 +8,10 @@
 </head>
 <body>
 <%@ include file="/pages/admin/admin-header.jsp" %>
-<%
-    session.setAttribute("id", session.getAttribute("id"));
-%>
+
+<c:set var="id" scope="session" value='${sessionScope.id}'/>
+
+
 <div class="container-fluid text-center">
     <div class="row content">
         <div class="col-sm-8 text-left">

@@ -31,5 +31,4 @@ public class Controller extends HttpServlet {
             req.getRequestDispatcher("pages/error/error_500.jsp").forward(req, res);
         }
     }
-
 }

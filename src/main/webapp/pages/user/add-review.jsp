@@ -1,11 +1,5 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: User
-  Date: 11/28/2022
-  Time: 8:58 AM
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <head>
     <title>Review Page</title>
@@ -15,12 +9,9 @@
 <body>
 
 <h1>Welcome to Review Page</h1>
-
-<%
-    request.setAttribute("alienId", session.getAttribute("alien_id"));
-    request.setAttribute("userId", session.getAttribute("user_id"));
-    request.setAttribute("alien", session.getAttribute("alien"));
-%>
+<c:set var="alienId" scope="request" value='${sessionScope.alien_id}'/>
+<c:set var="userId" scope="request" value='${sessionScope.user_id}'/>
+<c:set var="alien" scope="request" value='${sessionScope.alien}'/>
 
 
 <form action="controller" method="get">

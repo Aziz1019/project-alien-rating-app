@@ -17,6 +17,7 @@ public class SecurityFilter implements Filter {
         HttpServletRequest httpServletRequest = (HttpServletRequest) request;
         HttpServletResponse httpServletResponse = (HttpServletResponse) response;
         httpServletResponse.sendRedirect(httpServletRequest.getContextPath() + indexPath);
+
         chain.doFilter(request, response);
     }
 }

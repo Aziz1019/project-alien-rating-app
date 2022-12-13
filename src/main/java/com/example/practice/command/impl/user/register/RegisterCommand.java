@@ -22,7 +22,7 @@ public class RegisterCommand implements Command {
             service.registerUser(new User(username, password));
             page = "index.jsp";
         } else {
-            page = "register.jsp";
+            page = "pages/user/register.jsp";
         }
         return page;
     }
