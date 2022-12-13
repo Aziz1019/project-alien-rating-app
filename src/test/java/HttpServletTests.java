@@ -1,4 +1,6 @@
 import com.example.practice.command.Command;
+import com.example.practice.command.impl.alien.ViewAlienCommand;
+import com.example.practice.command.impl.alien.add.ForwardAlienCommand;
 import com.example.practice.command.impl.review.ForwardReviewCommand;
 import com.example.practice.command.impl.user.LoginCommand;
 import com.example.practice.command.impl.user.ViewCommand;
@@ -15,7 +17,19 @@ public class HttpServletTests {
     Command view = new ViewCommand();
     Command login = new LoginCommand();
     Command forwardReview = new ForwardReviewCommand();
+    Command viewAlien = new ViewAlienCommand();
 
+    @Test
+    void testViewAlienShouldReturnAdminPage() throws IOException {
+        HttpServletRequest request = mock(HttpServletRequest.class);
+        when(request.getParameter("page")).thenReturn("admin");
+        try {
+            String execute = viewAlien.execute(request);
+            assertThat(execute).isEqualTo("pages/admin/views/alien-page.jsp");
+        } catch (CommandException e) {
+            throw new RuntimeException(e);
+        }
+    }
     @Test
     void testForwardReviewShouldReturnReviewPage() throws IOException {
         HttpServletRequest request = mock(HttpServletRequest.class);
